@@ -25,8 +25,8 @@ public class LevelExporter : EditorWindow
             // オブジェクト名やタグでタイプを判定
             if (obj.name.Contains("Floor")) type = 0;      // 床（特別な扱い）
             else if (obj.name.Contains("Block")) type = 1; // 通常ブロック（元のType 0の代わり）
-            else if (obj.name.Contains("Tree")) type = 1;  // 木（元のType 1）
-            else if (obj.name.Contains("Kirby")) type = 2; // カービィ
+            else if (obj.name.Contains("Tree")) type = 2;  // 木（元のType 1）
+            else if (obj.name.Contains("Kirby")) type = 3; // カービィ
 
             // 対象外のオブジェクトは無視
             if (type == -1) continue;
