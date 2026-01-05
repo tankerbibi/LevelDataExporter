@@ -2,42 +2,42 @@ using UnityEngine;
 using UnityEditor;
 using System.IO;
 using System.Text;
-// using System; // System.Environment を使うために必要
 
 public class LevelExporter : EditorWindow
 {
     [MenuItem("Tools/Export Level to CSV")]
     public static void ExportLevel()
     {
-        // 保存先のパス（必要に応じて変更してください。デスクトップ等に出すとわかりやすいです）
+        // 保存先のパスをプロジェクトのデータフォルダに直接指定
         string path = EditorUtility.SaveFilePanel("Save Level", "C:\\Users\\towak\\source\\repos\\tankerbibi\\DX28_GOLF\\asset\\data", "level_data", "csv");
         if (string.IsNullOrEmpty(path)) return;
 
         StringBuilder sb = new StringBuilder();
-
-        // シーン上の全てのオブジェクトを取得（必要に応じてタグでフィルタリングしても良いです）
         GameObject[] allObjects = Object.FindObjectsOfType<GameObject>();
 
         foreach (GameObject obj in allObjects)
         {
-            int type = -1;
+            string name = "aaa";
 
-            // オブジェクト名やタグでタイプを判定
-            if (obj.name.Contains("Floor")) type = 0;      // 床（特別な扱い）
-            else if (obj.name.Contains("Block")) type = 1; // 通常ブロック（元のType 0の代わり）
-            else if (obj.name.Contains("Tree")) type = 2;  // 木（元のType 1）
-            else if (obj.name.Contains("Kirby")) type = 3; // カービィ
+            // 名前でType判定（DirectX側の配列インデックスに合わせる）
+            if (obj.name.Contains("Block")) name = "block";
+            else if (obj.name.Contains("Tree")) name = "tree";
+            else if (obj.name.Contains("Kirby")) name = "kirby";
 
-            // 対象外のオブジェクトは無視
-            if (type == -1) continue;
+            // 判定に該当しないオブジェクト（CameraやLightなど）はスキップ
+            if (name == "aaa") continue;
 
-            // DirectXはY-Up、UnityもY-Upですが、座標系に合わせて調整が必要な場合があります。
-            // ここではそのまま出力します。
+            // --- 座標の補正（四捨五入） ---
+            // 小数点第2位までで丸める処理（1.00001 -> 1.0）
+            float posX = Mathf.Round(obj.transform.position.x * 100f) / 100f;
+            float posY = Mathf.Round(obj.transform.position.y * 100f) / 100f;
+            float posZ = Mathf.Round(obj.transform.position.z * 100f) / 100f;
+
             // フォーマット: Type, X, Y, Z
-            sb.AppendLine($"{type},{obj.transform.position.x},{obj.transform.position.y},{obj.transform.position.z}");
+            sb.AppendLine($"{name},{posX},{posY},{posZ}");
         }
 
         File.WriteAllText(path, sb.ToString());
-        Debug.Log("Level Exported to: " + path);
+        Debug.Log("Level Exported with rounded coordinates to: " + path);
     }
 }
