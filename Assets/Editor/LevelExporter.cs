@@ -21,8 +21,9 @@ public class LevelExporter : EditorWindow
 
             // 名前でType判定（DirectX側の配列インデックスに合わせる）
             if (obj.name.Contains("Block")) name = "block";
-            else if (obj.name.Contains("Tree")) name = "tree";
-            else if (obj.name.Contains("Kirby")) name = "kirby";
+            if (obj.name.Contains("Tree")) name = "tree";
+            if (obj.name.Contains("Kirby")) name = "kirby";
+            if (obj.name.Contains("BreakableBlock")) name = "breakableBlock";
 
             // 判定に該当しないオブジェクト（CameraやLightなど）はスキップ
             if (name == "aaa") continue;
