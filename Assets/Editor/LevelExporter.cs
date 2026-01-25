@@ -9,7 +9,7 @@ public class LevelExporter : EditorWindow
     public static void ExportLevel()
     {
         // 保存先のパスをプロジェクトのデータフォルダに直接指定
-        string path = EditorUtility.SaveFilePanel("Save Level", "C:\\Users\\towak\\source\\repos\\tankerbibi\\DX28_GOLF\\asset\\data", "level_data", "csv");
+        string path = EditorUtility.SaveFilePanel("Save Level", "C:\\Users\\towak\\source\\repos\\tankerbibi\\DX28_GOLF\\asset\\data", "levelData_", "csv");
         if (string.IsNullOrEmpty(path)) return;
 
         StringBuilder sb = new StringBuilder();
@@ -22,11 +22,16 @@ public class LevelExporter : EditorWindow
             // 名前でType判定（DirectX側の配列インデックスに合わせる）
             if (obj.name.Contains("Block")) name = "Block";
             if (obj.name.Contains("Tree")) name = "Tree";
-            if (obj.name.Contains("Kirby")) name = "Kirby";
+            //if (obj.name.Contains("Kirby")) name = "Kirby";
             if (obj.name.Contains("BreakableBlock")) name = "BreakableBlock";
-            if (obj.name.Contains("Start")) name = "Start";
-            if (obj.name.Contains("Goal")) name = "Goal";
+            if (obj.name.Contains("StartP")) name = "StartPoint";
+            if (obj.name.Contains("StartFl")) name = "StartFlag";
+            if (obj.name.Contains("GoalP")) name = "GoalPoint";
+            if (obj.name.Contains("GoalFl")) name = "GoalFlag";
+            if (obj.name.Contains("BackgroundB")) name = "BackgroundBlock";
+            if (obj.name.Contains("BillboardTree")) name = "BillboardTree";
 
+            //if (obj.name.StartsWith("Background")) name = "BackgroundBlock";
 
             // 判定に該当しないオブジェクト（CameraやLightなど）はスキップ
             if (name == "aaa") continue;
