@@ -30,6 +30,8 @@ public class LevelExporter : EditorWindow
             if (obj.name.Contains("GoalFl")) name = "GoalFlag";
             if (obj.name.Contains("BackgroundB")) name = "BackgroundBlock";
             if (obj.name.Contains("BillboardTree")) name = "BillboardTree";
+            if (obj.name.Contains("Grass")) name = "Grass";
+            // if (obj.name.StartsWith("Grass")) name = "Grass";
 
             //if (obj.name.StartsWith("Background")) name = "BackgroundBlock";
 
