@@ -9,7 +9,7 @@ public class LevelExporter : EditorWindow
     public static void ExportLevel()
     {
         // 保存先のパスをプロジェクトのデータフォルダに直接指定
-        string path = EditorUtility.SaveFilePanel("Save Level", "C:\\Users\\towak\\source\\repos\\tankerbibi\\DX28_GOLF\\asset\\data", "levelData_", "csv");
+        string path = EditorUtility.SaveFilePanel("Save Level", "C:\\Users\\towak\\source\\repos\\tankerbibi\\DX28_GOLF\\asset\\data", "levelData_1", "csv");
         if (string.IsNullOrEmpty(path)) return;
 
         StringBuilder sb = new StringBuilder();
@@ -31,6 +31,7 @@ public class LevelExporter : EditorWindow
             if (obj.name.Contains("BackgroundB")) name = "BackgroundBlock";
             if (obj.name.Contains("BillboardTree")) name = "BillboardTree";
             if (obj.name.Contains("Grass")) name = "Grass";
+            if (obj.name.Contains("slope")) name = "Slope";
             // if (obj.name.StartsWith("Grass")) name = "Grass";
 
             //if (obj.name.StartsWith("Background")) name = "BackgroundBlock";
