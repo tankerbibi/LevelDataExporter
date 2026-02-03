@@ -45,10 +45,18 @@ public class LevelExporter : EditorWindow
             float posY = Mathf.Round(obj.transform.position.y * 100f) / 100f;
             float posZ = Mathf.Round(obj.transform.position.z * 100f) / 100f;
 
-            // フォーマット: Type, X, Y, Z
-            sb.AppendLine($"{name},{posX},{posY},{posZ}");
-        }
+            float rotX = Mathf.Round(obj.transform.rotation.x * 100f) / 100f;
+            float rotY = Mathf.Round(obj.transform.rotation.y * 100f) / 100f;
+            float rotZ = Mathf.Round(obj.transform.rotation.z * 100f) / 100f;
 
+            float sizeX = Mathf.Round(obj.transform.localScale.x * 100f) / 100f;
+            float sizeY = Mathf.Round(obj.transform.localScale.y * 100f) / 100f;
+            float sizeZ = Mathf.Round(obj.transform.localScale.z * 100f) / 100f;
+
+            // フォーマット: Type, X, Y, Z
+            sb.AppendLine($"{name},{posX},{posY},{posZ},{rotX},{rotY},{rotZ},{sizeX},{sizeY},{sizeZ}");
+        }
+        x
         File.WriteAllText(path, sb.ToString());
         Debug.Log("Level Exported with rounded coordinates to: " + path);
     }
