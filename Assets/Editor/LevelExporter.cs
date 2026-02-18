@@ -56,7 +56,6 @@ public class LevelExporter : EditorWindow
             // フォーマット: Type, X, Y, Z
             sb.AppendLine($"{name},{posX},{posY},{posZ},{rotX},{rotY},{rotZ},{sizeX},{sizeY},{sizeZ}");
         }
-        x
         File.WriteAllText(path, sb.ToString());
         Debug.Log("Level Exported with rounded coordinates to: " + path);
     }
